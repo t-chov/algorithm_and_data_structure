@@ -4,7 +4,7 @@ import kotlin.math.abs
 // import kotlin.math.min
 
 fun main() {
-    val COST_MAX = 1 shl 16
+    val COST_MAX = 1 shl 24
     var N: Int
     var K: Int
     readLine()!!.split(" ").let {
