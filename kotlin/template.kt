@@ -1,7 +1,10 @@
 import java.io.PrintWriter
 
-// println は遅いので TLE 防止のために
-val pw = PrintWriter(System.out)
+fun main() {
+    // println は遅いので TLE 防止のために
+    val pw = PrintWriter(System.out)
+    // solve here
+}
 
 // input
 fun next() = readLine()!!
