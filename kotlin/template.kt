@@ -1,14 +1,17 @@
-package abc.abc045
+import java.io.PrintWriter
 
-import kotlin.math.pow
+// println は遅いので TLE 防止のために
+val pw = PrintWriter(System.out)
 
-fun main() {
-    val str = readLine()!!
-    val bitLength = str.length - 1
-    val fullBit = (2.0.pow(bitLength) - 1).toInt()
-
-    print((0..fullBit).map { str.splitByBitFlag(it).map(String::toLong).sum() }.sum())
-}
+// input
+fun next() = readLine()!!
+fun nextInt() = next().toInt()
+fun nectLong() = next().toLong()
+fun nextDouble() = next().toDouble()
+fun listOfString() = next().split(" ")
+fun listOfInt() = listOfString().map(String::toInt)
+fun listOfLong() = listOfString().map(String::toLong)
+fun listOfDouble() = listOfString().map(String::toDouble)
 
 // ビットフラグ化
 fun Int.toBitFlag(len: Int) = Integer.toBinaryString(this).padStart(
@@ -19,7 +22,7 @@ fun Int.toBitFlag(len: Int) = Integer.toBinaryString(this).padStart(
 // ビットフラグで分割する
 fun String.splitByBitFlag(flagNum: Int): List<String> {
     val bitFlag = flagNum.toBitFlag(this.length - 1)
-    // 1桁だと XX になってしまうので 1桁は Early return する
+    // 1桁だと XX になってしまうので 1桁は特殊処理
     if (bitFlag == "0") return listOf(this)
 
     var s = ""
