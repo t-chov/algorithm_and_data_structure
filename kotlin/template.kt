@@ -43,6 +43,11 @@ fun String.splitByBitFlag(flagNum: Int): List<String> {
     return n
 }
 
+fun gcd(a: Long, b: Long): Long {
+    if (b == 0L) return a
+    return gcd(b, a % b)
+}
+
 fun <E : Comparable<E>> List<E>.lowerBound(v: E): Int {
     val res = binarySearch(v, Comparator { o1, o2 -> if (o1 >= o2) 1 else -1 })
     return if (res >= 0) res else res.inv()
