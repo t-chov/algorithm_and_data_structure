@@ -57,3 +57,17 @@ fun <E : Comparable<E>> List<E>.upperBound(v: E): Int {
     val res = binarySearch(v, Comparator { o1, o2 -> if (o1 > o2) 1 else -1 })
     return if (res >= 0) res else res.inv()
 }
+
+/* long N の m 乗を MOD するやつ */
+fun modPow(n: Long, m: Long, MOD: Long = (1L shl 31)): Long {
+    var ret = 1L
+    var x = (n % MOD)
+    if (x < 0) x += MOD
+    var k = m
+    while (k > 0) {
+        if ((k and 1L) == 1L) { ret = (ret * x) % MOD }
+        x = (x * x) % MOD
+        k = k shr 1
+    }
+    return ret
+}
