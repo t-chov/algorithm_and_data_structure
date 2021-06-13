@@ -58,6 +58,17 @@ fun <E : Comparable<E>> List<E>.upperBound(v: E): Int {
     return if (res >= 0) res else res.inv()
 }
 
+fun dfsSearch(paths: List<Set<Int>>, size: Int): Array<Array<Boolean>> {
+    // 到着可能かどうか
+    val reachable = Array(size) { Array(size) { false } }
+    fun dfs(s: Int, i: Int) {
+        if (reachable[s][i]) return
+        reachable[s][i] = true
+        paths[i].forEach { dfs(s, it) }
+    }
+    return reachable
+}
+
 /* long N の m 乗を MOD するやつ */
 fun modPow(n: Long, m: Long, MOD: Long = (1L shl 31)): Long {
     var ret = 1L
