@@ -1,54 +1,21 @@
 package abc.abc204
 
-// DFS, BFS を勉強する
-
-fun reachable(paths: HashMap<Int, MutableSet<Int>>, start: Int, goal: Int, prevStart: Int): Boolean {
-    if (start == goal) return true
-    val nexts = paths[start] ?: return false
-    if (goal in nexts) return true
-    for (via in nexts) {
-        // 循環したら打ち切る
-        if (prevStart == via) {
-            return false
-        }
-        return reachable(paths, via, goal, start)
-    }
-    return false
-}
-
 fun main() {
     val (N, M) = readLine()!!.split(" ").map(String::toInt)
-    // O(M)
-    val roads = List(M) {
-        val (a, b) = readLine()!!.split(" ").map(String::toInt)
-        a to b
-    }.sortedBy { it.first }
-    // O(M)
-    val paths = HashMap<Int, MutableSet<Int>>()
-    roads.forEach { road ->
-        val src = road.first
-        val dst = road.second
-        if (!paths.containsKey(src)) {
-            paths.set(src, mutableSetOf(src))
-        }
-        paths[src]!!.add(dst)
+    val paths = Array(N) { hashSetOf<Int>() }
+    (0 until M).forEach { m ->
+        val (am, bm) = readLine()!!.split(" ").map(String::toInt)
+        paths[am - 1].add(bm - 1)
     }
-    // 孤立リンクの考慮. O(N)
-    (1..N).forEach { n ->
-        if (!paths.containsKey(n)) {
-            paths.set(n, mutableSetOf(n))
-        }
+    // 到着可能かどうか
+    val reachable = Array(N) { Array(N) { false } }
+    fun dfs(s: Int, i: Int) {
+        if (reachable[s][i]) return
+        reachable[s][i] = true
+        paths[i].forEach { dfs(s, it) }
     }
 
-    // trips[a][b] = は a to b が可能か
-    val trips = Array(N + 1) { Array(N + 1) { false } }
-    for (start in 1..N) {
-        for (goal in 1..N) {
-            trips[start][goal] = reachable(paths, start, goal, start)
-            print("${trips[start][goal]} ")
-        }
-        print("\n")
-    }
+    (0 until N).forEach { dfs(it, it) }
 
-    println(trips.flatten().filter { it }.size)
+    println(reachable.sumBy { it.count { it } })
 }
