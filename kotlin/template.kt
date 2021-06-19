@@ -4,6 +4,8 @@ fun main() {
     // println は遅いので TLE 防止のために
     val pw = PrintWriter(System.out)
     // solve here
+
+    pw.flush()
 }
 
 // input
