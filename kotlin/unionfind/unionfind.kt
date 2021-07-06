@@ -1,5 +1,5 @@
-private data class UnionFind(
-        // 各頂点の親頂点の番号. 自身が親の場合は-1
+private class UnionFind(
+        // 各頂点の親頂点の番号.
         private val roots: Array<Int>,
         // 各頂点の属する根付き木の頂点数
         private val sizes: Array<Int>
@@ -12,8 +12,8 @@ private data class UnionFind(
     fun isSame(x: Int, y: Int): Boolean = root(x) == root(y)
 
     fun unite(x: Int, y: Int): Boolean {
-        var rootX = root(x)
-        var rootY = root(y)
+        val rootX = root(x)
+        val rootY = root(y)
         // 同じグループの時はなにもしない
         if (rootX == rootY) return false
 
