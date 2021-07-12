@@ -28,6 +28,9 @@ private fun main() {
     pw.flush()
 }
 
+/**
+ * 重みなしではBFSによって最短路問題が解ける
+ */
 private fun bfs(graph: List<HashSet<Int>>, s: Int): List<Int> {
     val n = graph.size
     val dist = Array(n) { -1 } // 全頂点を未訪問に初期化
