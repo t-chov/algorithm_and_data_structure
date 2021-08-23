@@ -16,6 +16,13 @@ def euclid_gcd(m: int, n: int) -> int:
     if n == 0:
         return m
     return euclid_gcd(n, m % n)
+
+
+def gcd(m: int, n: int) -> int:
+    if n == 0:
+        return m
+    return gcd(n, m % n)
+
     
 
 if __name__ == '__main__':
